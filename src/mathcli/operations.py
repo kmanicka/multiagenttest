@@ -88,3 +88,38 @@ def multiply(*numbers: float) -> float:
     for num in numbers:
         result *= num
     return result
+
+
+def divide(*numbers: float) -> float:
+    """Divide numbers from left to right.
+
+    Divides the first number by all subsequent numbers.
+    For example: divide(100, 2, 5) = 100 / 2 / 5 = 10.0
+
+    Args:
+        *numbers: Variable number of numeric arguments (minimum 2)
+
+    Returns:
+        float: The result of the division
+
+    Raises:
+        ValueError: If fewer than 2 numbers provided
+        ZeroDivisionError: If attempting to divide by zero
+
+    Examples:
+        >>> divide(20, 4)
+        5.0
+        >>> divide(100, 2, 5)
+        10.0
+        >>> divide(-20, 4)
+        -5.0
+    """
+    if len(numbers) < 2:
+        raise ValueError("divide requires at least 2 numbers")
+
+    result = numbers[0]
+    for num in numbers[1:]:
+        if num == 0:
+            raise ZeroDivisionError("Cannot divide by zero")
+        result /= num
+    return result
