@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mathcli"
+version = "0.1.0"
+description = "A command-line tool for basic mathematical operations"
+readme = "README.md"
+requires-python = ">=3.8"
+authors = [
+    {name = "Multi-Agent Development Team"}
+]
+dependencies = []
+
+[project.scripts]
+mathcli = "mathcli.__main__:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.flake8]
+max-line-length = 88
+extend-ignore = "E203"
