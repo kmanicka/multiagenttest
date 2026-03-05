@@ -8,18 +8,12 @@ from mathcli import __version__
 def main():
     """Main function for the mathcli CLI."""
     parser = argparse.ArgumentParser(
-        description="A command-line tool for mathematical operations",
-        prog="mathcli"
+        description="A command-line tool for mathematical operations", prog="mathcli"
     )
-    parser.add_argument(
-        '--version',
-        action='version',
-        version=f'mathcli {__version__}'
-    )
+    parser.add_argument("--version", action="version", version=f"mathcli {__version__}")
 
-    subparsers = parser.add_subparsers(
-        dest='command',
-        help='Available commands'
+    subparsers = parser.add_subparsers(  # noqa: F841
+        dest="command", help="Available commands"
     )
 
     # Placeholder for future commands
@@ -38,5 +32,5 @@ def main():
     # Command routing will be implemented when operations are added
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
