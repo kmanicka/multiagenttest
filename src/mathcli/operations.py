@@ -29,6 +29,38 @@ def add(*numbers: float) -> float:
     return sum(numbers)
 
 
+def subtract(*numbers: float) -> float:
+    """Subtract numbers from left to right.
+
+    Subtracts all subsequent numbers from the first number.
+    For example: subtract(10, 3, 2) = 10 - 3 - 2 = 5
+
+    Args:
+        *numbers: Variable number of numeric arguments (minimum 2)
+
+    Returns:
+        float: The result of the subtraction
+
+    Raises:
+        ValueError: If fewer than 2 numbers provided
+
+    Examples:
+        >>> subtract(10, 3)
+        7.0
+        >>> subtract(100, 25, 10, 5)
+        60.0
+        >>> subtract(5, 10)
+        -5.0
+    """
+    if len(numbers) < 2:
+        raise ValueError("subtract requires at least 2 numbers")
+
+    result = numbers[0]
+    for num in numbers[1:]:
+        result -= num
+    return result
+
+
 def multiply(*numbers: float) -> float:
     """Multiply two or more numbers together.
 
