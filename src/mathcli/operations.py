@@ -27,3 +27,32 @@ def add(*numbers: float) -> float:
     if len(numbers) < 2:
         raise ValueError("add requires at least 2 numbers")
     return sum(numbers)
+
+
+def multiply(*numbers: float) -> float:
+    """Multiply two or more numbers together.
+
+    Args:
+        *numbers: Variable number of numeric arguments to multiply
+
+    Returns:
+        float: The product of all numbers
+
+    Raises:
+        ValueError: If fewer than 2 numbers provided
+
+    Examples:
+        >>> multiply(5, 4)
+        20.0
+        >>> multiply(2, 3, 4)
+        24.0
+        >>> multiply(-2, -3)
+        6.0
+    """
+    if len(numbers) < 2:
+        raise ValueError("multiply requires at least 2 numbers")
+
+    result = 1
+    for num in numbers:
+        result *= num
+    return result
