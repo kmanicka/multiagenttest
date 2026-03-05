@@ -1,7 +1,7 @@
 """Unit tests for mathematical operations."""
 
 import pytest
-from mathcli.operations import add, multiply
+from mathcli.operations import add, subtract, multiply
 
 
 class TestAdd:
@@ -45,6 +45,59 @@ class TestAdd:
         """Test that add requires at least 2 numbers."""
         with pytest.raises(ValueError, match="add requires at least 2 numbers"):
             add()
+
+
+class TestSubtract:
+    """Test cases for the subtract operation."""
+
+    def test_subtract_two_numbers(self):
+        """Test subtracting two integers."""
+        assert subtract(10, 3) == 7
+
+    def test_subtract_multiple_numbers(self):
+        """Test subtracting multiple numbers (left-to-right)."""
+        assert subtract(100, 25, 10, 5) == 60
+
+    def test_subtract_floats(self):
+        """Test subtracting floating-point numbers."""
+        assert subtract(10.5, 2.5, 1.0) == 7.0
+
+    def test_subtract_negative_result(self):
+        """Test subtraction resulting in negative number."""
+        assert subtract(5, 10) == -5
+
+    def test_subtract_negative_numbers(self):
+        """Test subtracting negative numbers."""
+        assert subtract(-5, -10) == 5
+        assert subtract(-5, 10) == -15
+        assert subtract(10, -5) == 15
+
+    def test_subtract_mixed_types(self):
+        """Test subtracting mix of integers and floats."""
+        assert subtract(10, 2.5) == 7.5
+
+    def test_subtract_large_numbers(self):
+        """Test subtracting very large numbers."""
+        assert subtract(1e10, 2e9) == 8e9
+
+    def test_subtract_zero(self):
+        """Test subtracting with zero."""
+        assert subtract(5, 0) == 5
+        assert subtract(0, 5) == -5
+
+    def test_subtract_same_number(self):
+        """Test subtracting same number results in zero."""
+        assert subtract(5, 5) == 0
+
+    def test_subtract_insufficient_arguments(self):
+        """Test that subtract requires at least 2 numbers."""
+        with pytest.raises(ValueError, match="subtract requires at least 2 numbers"):
+            subtract(5)
+
+    def test_subtract_no_arguments(self):
+        """Test that subtract requires at least 2 numbers."""
+        with pytest.raises(ValueError, match="subtract requires at least 2 numbers"):
+            subtract()
 
 
 class TestMultiply:
