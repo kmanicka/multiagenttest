@@ -21,6 +21,14 @@ def main():
         "numbers", nargs="+", type=float, help="Numbers to add (space-separated)"
     )
 
+    # Multiply command
+    multiply_parser = subparsers.add_parser(
+        "multiply", help="Multiply two or more numbers"
+    )
+    multiply_parser.add_argument(
+        "numbers", nargs="+", type=float, help="Numbers to multiply (space-separated)"
+    )
+
     args = parser.parse_args()
 
     if not args.command:
@@ -34,6 +42,16 @@ def main():
                 print("Error: add requires at least 2 numbers", file=sys.stderr)
                 sys.exit(1)
             result = operations.add(*args.numbers)
+            print(result)
+        except ValueError as e:
+            print(f"Error: {e}", file=sys.stderr)
+            sys.exit(1)
+    elif args.command == "multiply":
+        try:
+            if len(args.numbers) < 2:
+                print("Error: multiply requires at least 2 numbers", file=sys.stderr)
+                sys.exit(1)
+            result = operations.multiply(*args.numbers)
             print(result)
         except ValueError as e:
             print(f"Error: {e}", file=sys.stderr)
