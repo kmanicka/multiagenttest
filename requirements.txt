@@ -1,0 +1,2 @@
+# Runtime dependencies for mathcli
+# Currently no external dependencies required - using Python stdlib only
