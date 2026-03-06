@@ -40,6 +40,17 @@ def main():
         "numbers", nargs="+", type=float, help="Numbers to multiply (space-separated)"
     )
 
+    # Divide command
+    divide_parser = subparsers.add_parser(
+        "divide", help="Divide numbers from left to right"
+    )
+    divide_parser.add_argument(
+        "numbers",
+        nargs="+",
+        type=float,
+        help="Numbers to divide (first / second / third...)",
+    )
+
     args = parser.parse_args()
 
     if not args.command:
@@ -75,6 +86,19 @@ def main():
             result = operations.multiply(*args.numbers)
             print(result)
         except ValueError as e:
+            print(f"Error: {e}", file=sys.stderr)
+            sys.exit(1)
+    elif args.command == "divide":
+        try:
+            if len(args.numbers) < 2:
+                print("Error: divide requires at least 2 numbers", file=sys.stderr)
+                sys.exit(1)
+            result = operations.divide(*args.numbers)
+            print(result)
+        except ValueError as e:
+            print(f"Error: {e}", file=sys.stderr)
+            sys.exit(1)
+        except ZeroDivisionError as e:
             print(f"Error: {e}", file=sys.stderr)
             sys.exit(1)
 

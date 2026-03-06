@@ -1,7 +1,7 @@
 """Unit tests for mathematical operations."""
 
 import pytest
-from mathcli.operations import add, subtract, multiply
+from mathcli.operations import add, subtract, multiply, divide
 
 
 class TestAdd:
@@ -150,3 +150,66 @@ class TestMultiply:
         """Test that multiply requires at least 2 numbers."""
         with pytest.raises(ValueError, match="multiply requires at least 2 numbers"):
             multiply()
+
+
+class TestDivide:
+    """Test cases for the divide operation."""
+
+    def test_divide_two_numbers(self):
+        """Test dividing two integers."""
+        assert divide(20, 4) == 5.0
+
+    def test_divide_multiple_numbers(self):
+        """Test dividing multiple numbers (left-to-right)."""
+        assert divide(100, 2, 5) == 10.0
+
+    def test_divide_floats(self):
+        """Test dividing floating-point numbers."""
+        assert divide(10.0, 2.5) == 4.0
+
+    def test_divide_with_precision(self):
+        """Test division with decimal precision."""
+        result = divide(10, 3)
+        assert abs(result - 3.333333333333333) < 1e-10
+
+    def test_divide_negative_numbers(self):
+        """Test dividing negative numbers."""
+        assert divide(-20, 4) == -5.0
+        assert divide(20, -4) == -5.0
+        assert divide(-20, -4) == 5.0
+
+    def test_divide_mixed_types(self):
+        """Test dividing mix of integers and floats."""
+        assert divide(10, 2.5) == 4.0
+
+    def test_divide_large_numbers(self):
+        """Test dividing very large numbers."""
+        assert divide(1e20, 1e10) == 1e10
+
+    def test_divide_by_one(self):
+        """Test dividing by one."""
+        assert divide(5, 1) == 5.0
+
+    def test_divide_result_less_than_one(self):
+        """Test division resulting in number less than 1."""
+        assert divide(1, 2) == 0.5
+
+    def test_divide_by_zero(self):
+        """Test that dividing by zero raises ZeroDivisionError."""
+        with pytest.raises(ZeroDivisionError, match="Cannot divide by zero"):
+            divide(10, 0)
+
+    def test_divide_by_zero_in_sequence(self):
+        """Test that zero in sequence raises ZeroDivisionError."""
+        with pytest.raises(ZeroDivisionError, match="Cannot divide by zero"):
+            divide(100, 2, 0, 5)
+
+    def test_divide_insufficient_arguments(self):
+        """Test that divide requires at least 2 numbers."""
+        with pytest.raises(ValueError, match="divide requires at least 2 numbers"):
+            divide(5)
+
+    def test_divide_no_arguments(self):
+        """Test that divide requires at least 2 numbers."""
+        with pytest.raises(ValueError, match="divide requires at least 2 numbers"):
+            divide()
