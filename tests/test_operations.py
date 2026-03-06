@@ -47,7 +47,6 @@ class TestAdd:
             add()
 
 
-<<<<<<< HEAD
 class TestSubtract:
     """Test cases for the subtract operation."""
 
@@ -151,7 +150,8 @@ class TestMultiply:
         """Test that multiply requires at least 2 numbers."""
         with pytest.raises(ValueError, match="multiply requires at least 2 numbers"):
             multiply()
-=======
+
+
 class TestDivide:
     """Test cases for the divide operation."""
 
@@ -213,4 +213,3 @@ class TestDivide:
         """Test that divide requires at least 2 numbers."""
         with pytest.raises(ValueError, match="divide requires at least 2 numbers"):
             divide()
->>>>>>> b2e1793 (Implement division operation)
