@@ -1,5 +1,7 @@
 # mathcli - Mathematical Operations CLI Tool
 
+[![CI](https://github.com/kmanicka/multiagenttest/actions/workflows/ci.yml/badge.svg)](https://github.com/kmanicka/multiagenttest/actions/workflows/ci.yml)
+
 A command-line tool for performing basic mathematical operations.
 
 ## Description
@@ -100,25 +102,58 @@ pip install -r requirements-dev.txt
 ### Running Tests
 
 ```bash
+# Run all tests
 pytest
+
+# Run with verbose output
+pytest -v
+
+# Run specific test file
+pytest tests/test_operations.py
+pytest tests/test_cli.py
+
+# Run specific test class
+pytest tests/test_operations.py::TestAdd
+
+# Run specific test function
+pytest tests/test_operations.py::TestAdd::test_add_two_numbers
 ```
 
 ### Running Tests with Coverage
 
 ```bash
+# Run tests with coverage report
 pytest --cov=mathcli
+
+# Generate detailed terminal coverage report
+pytest --cov=mathcli --cov-report=term-missing
+
+# Generate HTML coverage report
+pytest --cov=mathcli --cov-report=html
+# Open htmlcov/index.html in browser
+
+# Check coverage meets threshold (80%)
+pytest --cov=mathcli --cov-fail-under=80
 ```
 
 ### Code Formatting
 
 ```bash
+# Format code
 black src/ tests/
+
+# Check formatting without modifying files
+black --check src/ tests/
 ```
 
 ### Linting
 
 ```bash
+# Run flake8 linter
 flake8 src/ tests/
+
+# Run with specific rules
+flake8 src/ tests/ --max-line-length=88
 ```
 
 ## Project Structure
