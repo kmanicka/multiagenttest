@@ -1,7 +1,7 @@
 """Unit tests for mathematical operations."""
 
 import pytest
-from mathcli.operations import add, subtract, multiply, divide, absolute_value
+from mathcli.operations import add, subtract, multiply, divide, absolute_value, modulo
 
 
 class TestAdd:
@@ -245,3 +245,45 @@ class TestAbsoluteValue:
     def test_absolute_value_negative_float(self):
         """Test absolute value of negative float."""
         assert absolute_value(-3.14159) == 3.14159
+
+
+class TestModulo:
+    """Test cases for the modulo operation."""
+
+    def test_modulo_basic(self):
+        """Test basic modulo operation."""
+        assert modulo(10, 3) == 1.0
+
+    def test_modulo_exact_division(self):
+        """Test modulo with exact division (no remainder)."""
+        assert modulo(10, 5) == 0.0
+
+    def test_modulo_float(self):
+        """Test modulo with floating-point numbers."""
+        assert modulo(10.5, 3) == 1.5
+
+    def test_modulo_negative_dividend(self):
+        """Test modulo with negative dividend."""
+        # Python's modulo follows the sign of the divisor
+        assert modulo(-10, 3) == 2.0
+
+    def test_modulo_negative_divisor(self):
+        """Test modulo with negative divisor."""
+        assert modulo(10, -3) == -2.0
+
+    def test_modulo_both_negative(self):
+        """Test modulo with both numbers negative."""
+        assert modulo(-10, -3) == -1.0
+
+    def test_modulo_large_numbers(self):
+        """Test modulo with large numbers."""
+        assert modulo(1e10, 3) == 1.0
+
+    def test_modulo_small_divisor(self):
+        """Test modulo with small divisor."""
+        assert modulo(5.5, 0.5) == 0.0
+
+    def test_modulo_zero_divisor(self):
+        """Test that modulo by zero raises ValueError."""
+        with pytest.raises(ValueError, match="Cannot divide by zero"):
+            modulo(10, 0)
