@@ -51,6 +51,12 @@ def main():
         help="Numbers to divide (first / second / third...)",
     )
 
+    # Absolute value command
+    abs_parser = subparsers.add_parser("abs", help="Get absolute value of a number")
+    abs_parser.add_argument(
+        "number", type=float, help="Number to get absolute value of"
+    )
+
     args = parser.parse_args()
 
     if not args.command:
@@ -101,6 +107,9 @@ def main():
         except ZeroDivisionError as e:
             print(f"Error: {e}", file=sys.stderr)
             sys.exit(1)
+    elif args.command == "abs":
+        result = operations.absolute_value(args.number)
+        print(result)
 
 
 if __name__ == "__main__":

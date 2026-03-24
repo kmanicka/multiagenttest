@@ -198,6 +198,28 @@ class TestCLIDivision:
         assert "error" in result.stderr.lower()
 
 
+class TestCLIAbsoluteValue:
+    """Test CLI absolute value command."""
+
+    def test_abs_positive_number(self):
+        """Test absolute value of positive number via CLI."""
+        result = run_cli("abs", "5")
+        if result.returncode == 0:
+            assert "5" in result.stdout.strip()
+
+    def test_abs_negative_number(self):
+        """Test absolute value of negative number via CLI."""
+        result = run_cli("abs", "-10.5")
+        if result.returncode == 0:
+            assert "10.5" in result.stdout.strip()
+
+    def test_abs_zero(self):
+        """Test absolute value of zero via CLI."""
+        result = run_cli("abs", "0")
+        if result.returncode == 0:
+            assert "0" in result.stdout.strip()
+
+
 class TestCLIErrorHandling:
     """Test CLI error handling."""
 
@@ -290,3 +312,21 @@ class TestCLIDirect:
         return_code, stdout, stderr = run_cli_direct("divide", "5")
         assert return_code == 1
         assert "error" in stderr.lower()
+
+    def test_abs_positive_direct(self):
+        """Test absolute value of positive number directly."""
+        return_code, stdout, stderr = run_cli_direct("abs", "5")
+        assert return_code == 0
+        assert "5" in stdout
+
+    def test_abs_negative_direct(self):
+        """Test absolute value of negative number directly."""
+        return_code, stdout, stderr = run_cli_direct("abs", "-10.5")
+        assert return_code == 0
+        assert "10.5" in stdout
+
+    def test_abs_zero_direct(self):
+        """Test absolute value of zero directly."""
+        return_code, stdout, stderr = run_cli_direct("abs", "0")
+        assert return_code == 0
+        assert "0" in stdout

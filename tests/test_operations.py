@@ -1,7 +1,7 @@
 """Unit tests for mathematical operations."""
 
 import pytest
-from mathcli.operations import add, subtract, multiply, divide
+from mathcli.operations import add, subtract, multiply, divide, absolute_value
 
 
 class TestAdd:
@@ -213,3 +213,35 @@ class TestDivide:
         """Test that divide requires at least 2 numbers."""
         with pytest.raises(ValueError, match="divide requires at least 2 numbers"):
             divide()
+
+
+class TestAbsoluteValue:
+    """Test cases for the absolute value operation."""
+
+    def test_absolute_value_positive(self):
+        """Test absolute value of positive number."""
+        assert absolute_value(5) == 5.0
+
+    def test_absolute_value_negative(self):
+        """Test absolute value of negative number."""
+        assert absolute_value(-10.5) == 10.5
+
+    def test_absolute_value_zero(self):
+        """Test absolute value of zero."""
+        assert absolute_value(0) == 0.0
+
+    def test_absolute_value_large_positive(self):
+        """Test absolute value of large positive number."""
+        assert absolute_value(1e10) == 1e10
+
+    def test_absolute_value_large_negative(self):
+        """Test absolute value of large negative number."""
+        assert absolute_value(-1e10) == 1e10
+
+    def test_absolute_value_small_negative(self):
+        """Test absolute value of small negative number."""
+        assert absolute_value(-0.001) == 0.001
+
+    def test_absolute_value_negative_float(self):
+        """Test absolute value of negative float."""
+        assert absolute_value(-3.14159) == 3.14159
