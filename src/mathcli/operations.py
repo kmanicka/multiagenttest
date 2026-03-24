@@ -123,3 +123,26 @@ def divide(*numbers: float) -> float:
             raise ZeroDivisionError("Cannot divide by zero")
         result /= num
     return result
+
+
+def absolute_value(number: float) -> float:
+    """Return the absolute value of a number.
+
+    The absolute value is the non-negative value of a number,
+    representing its distance from zero.
+
+    Args:
+        number: The number to get absolute value of
+
+    Returns:
+        float: The absolute value (non-negative)
+
+    Examples:
+        >>> absolute_value(-10.5)
+        10.5
+        >>> absolute_value(5)
+        5.0
+        >>> absolute_value(0)
+        0.0
+    """
+    return abs(number)
