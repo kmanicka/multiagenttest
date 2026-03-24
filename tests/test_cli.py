@@ -220,6 +220,34 @@ class TestCLIAbsoluteValue:
             assert "0" in result.stdout.strip()
 
 
+class TestCLIModulo:
+    """Test CLI modulo command."""
+
+    def test_mod_basic(self):
+        """Test basic modulo via CLI."""
+        result = run_cli("mod", "10", "3")
+        if result.returncode == 0:
+            assert "1" in result.stdout.strip()
+
+    def test_mod_exact_division(self):
+        """Test modulo with no remainder via CLI."""
+        result = run_cli("mod", "10", "5")
+        if result.returncode == 0:
+            assert "0" in result.stdout.strip()
+
+    def test_mod_float(self):
+        """Test modulo with floats via CLI."""
+        result = run_cli("mod", "10.5", "3")
+        if result.returncode == 0:
+            assert "1.5" in result.stdout.strip()
+
+    def test_mod_zero_divisor(self):
+        """Test that modulo by zero fails with error."""
+        result = run_cli("mod", "10", "0")
+        assert result.returncode == 1
+        assert "cannot divide by zero" in result.stderr.lower()
+
+
 class TestCLIErrorHandling:
     """Test CLI error handling."""
 
@@ -330,3 +358,21 @@ class TestCLIDirect:
         return_code, stdout, stderr = run_cli_direct("abs", "0")
         assert return_code == 0
         assert "0" in stdout
+
+    def test_mod_basic_direct(self):
+        """Test basic modulo directly."""
+        return_code, stdout, stderr = run_cli_direct("mod", "10", "3")
+        assert return_code == 0
+        assert "1" in stdout
+
+    def test_mod_exact_division_direct(self):
+        """Test modulo with no remainder directly."""
+        return_code, stdout, stderr = run_cli_direct("mod", "10", "5")
+        assert return_code == 0
+        assert "0" in stdout
+
+    def test_mod_zero_divisor_direct(self):
+        """Test modulo by zero directly."""
+        return_code, stdout, stderr = run_cli_direct("mod", "10", "0")
+        assert return_code == 1
+        assert "cannot divide by zero" in stderr.lower()

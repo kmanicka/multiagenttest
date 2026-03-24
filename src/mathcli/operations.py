@@ -146,3 +146,32 @@ def absolute_value(number: float) -> float:
         0.0
     """
     return abs(number)
+
+
+def modulo(a: float, b: float) -> float:
+    """Return the remainder of a divided by b.
+
+    Uses Python's modulo operator which follows the sign of the divisor.
+    For example: -10 % 3 = 2 (not -1)
+
+    Args:
+        a: The dividend
+        b: The divisor
+
+    Returns:
+        float: The remainder
+
+    Raises:
+        ValueError: If divisor is zero
+
+    Examples:
+        >>> modulo(10, 3)
+        1.0
+        >>> modulo(10, 5)
+        0.0
+        >>> modulo(10.5, 3)
+        1.5
+    """
+    if b == 0:
+        raise ValueError("Cannot divide by zero")
+    return a % b

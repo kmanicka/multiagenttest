@@ -57,6 +57,11 @@ def main():
         "number", type=float, help="Number to get absolute value of"
     )
 
+    # Modulo command
+    mod_parser = subparsers.add_parser("mod", help="Get remainder of division")
+    mod_parser.add_argument("a", type=float, help="Dividend")
+    mod_parser.add_argument("b", type=float, help="Divisor")
+
     args = parser.parse_args()
 
     if not args.command:
@@ -110,6 +115,13 @@ def main():
     elif args.command == "abs":
         result = operations.absolute_value(args.number)
         print(result)
+    elif args.command == "mod":
+        try:
+            result = operations.modulo(args.a, args.b)
+            print(result)
+        except ValueError as e:
+            print(f"Error: {e}", file=sys.stderr)
+            sys.exit(1)
 
 
 if __name__ == "__main__":
